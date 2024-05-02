@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-кинотеатр</title>
+    <link href="https://fonts.googleapis.com/css?family=Geologica:100,200,300,regular,500,600,700,800,900"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Jacquard+12+Charted:regular" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header id="header">
+        <h1>Онлайн-кинотеатр</h1>
+        <nav>
+            <ul>
+                <!-- по data-target можно скрывать или отображать нужную секцию data-target должен совпадать с ID секции -->
+                <li><a href="#" data-target="main_header">Главная</a></li>
+                <li><a href="#" data-target="_movies">Фильмы</a></li>
+                <li><a href="#" data-target="search">Поиск</a></li>
+                <li><a href="#" data-target="favorites">Избранное</a></li>
+                <li><a href="#" data-target="about">О нас</a></li>
+                <li><a href="#" data-target="contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Раздел главной -->
+        <section class="main-section" id="main_header">
+            <h2>Главная</h2>
+            <div class="carousel-container">
+                <div class="swiper-container carousel">
+                    <div class="swiper-wrapper">
+                        <!-- Здесь будут отображаться рандомные постеры кино в карусели -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="news-section">
+                <!-- Здесь будут отображаться рандомные новости через API -->
+            </div>
+        </section>
+
+        <!-- Раздел "Фильмы" -->
+        <section class="hide" id="_movies">
+            <div id="movies">
+                <!-- Карточки фильмов -->
+            </div>
+        </section>
+
+        <!-- Раздел "Поиск" -->
+        <section class="hide search-section" id="search">
+            <div class="search-container">
+                <h2>Поиск фильмов</h2>
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="search-title">Поиск по названию:</label>
+                        <input type="text" id="search-title" name="search-title" placeholder="Введите название фильма">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-genre">Поиск по жанру:</label>
+                        <select id="search-genre" name="search-genre">
+                            <option value="">Выберите жанр</option>
+                            <!-- Опции для выбора жанра будут добавлены динамически из JavaScript но пока добовляю из масива в ручную -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-year">Поиск по году выпуска:</label>
+                        <input type="number" id="search-year" name="search-year" placeholder="Год выпуска">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-actors">Поиск по актерам:</label>
+                        <input type="text" id="search-actors" name="search-actors" placeholder="Введите имя актера">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-rating-min">Мин. и макс. рейтинг:</label>
+                        <input type="number" id="search-rating-min" name="search-rating-min" placeholder="Мин. рейтинг">
+                        <input type="number" id="search-rating-max" name="search-rating-max"
+                            placeholder="Макс. рейтинг">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-duration-min">Мин. и макс. продолжительность:</label>
+                        <input type="number" id="search-duration-min" name="search-duration-min"
+                            placeholder="Мин. продолжительность (мин)">
+                        <input type="number" id="search-duration-max" name="search-duration-max"
+                            placeholder="Макс. продолжительность (мин)">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-release-date-start">Дата выхода с:</label>
+                        <input type="date" id="search-release-date-start" name="search-release-date-start">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-release-date-end">Дата выхода по:</label>
+                        <input type="date" id="search-release-date-end" name="search-release-date-end">
+                    </div>
+                    <div class="form-group">
+                        <label for="sort-by">Сортировать по:</label>
+                        <select id="sort-by" name="sort-by">
+                            <option value="alphabetical">По алфавиту</option>
+                            <option value="rating">По рейтингу</option>
+                            <option value="release-date">По дате выхода</option>
+                        </select>
+                    </div>
+
+                    <!-- настроить сортировку -->
+
+                    <div class="form-group">
+                        <label>Фильтровать результаты по:</label>
+                        <div>
+                            <input type="checkbox" id="filter-new-releases" name="filter-new-releases">
+                            <label for="filter-new-releases">Новым релизам</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="filter-action" name="filter-action">
+                            <label for="filter-action">Жанру "Боевик"</label>
+                        </div>
+                    </div>
+                    <button type="submit" onclick="e.preventDefault()">Найти</button>
+                </form>
+            </div>
+            <div class="search-results">
+                <!-- Здесь будут отображаться результаты поиска -->
+            </div>
+        </section>
+
+        <!-- Раздел "Избранное" -->
+        <section class="hide favorite-section" id="favorites">
+            <h2>Избранное</h2>
+            <div class="favorite-movies">
+                <!-- Здесь будут отображаться избранные фильмы -->
+            </div>
+        </section>
+
+        <!-- Раздел "О нас" -->
+        <section class="about hide" id="about">
+            <h2>О нас</h2>
+            <p>Онлайн-кинотеатр - это удобный способ наслаждаться фильмами в уютной домашней обстановке. Мы предлагаем
+                широкий
+                выбор фильмов различных жанров для всех возрастов. Наша цель - сделать ваше кинематографическое
+                путешествие
+                незабываемым!</p>
+            <p>Присоединяйтесь к нам и откройте для себя увлекательный мир кино!</p>
+            <p>Мы работаем для вас с 9:00 до 21:00 ежедневно.</p>
+        </section>
+
+        <!-- Раздел "Контакты" -->
+        <section class="contacts hide" id="contacts">
+            <h2>Контакты</h2>
+            <p>Наш адрес: ул. Ержанова, 123</p>
+            <p>Телефон: +7 (707) 864-48-32</p>
+            <p>Email: info@online-cinema.com</p>
+            <p>Следите за нами в социальных сетях:</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© Rudi 2024 Онлайн-кинотеатр. Все права защищены.</p>
+    </footer>
+
+    <div class="modal_container hide">
+        <!-- модальное окно для отображения информации о фильме -->
+    </div>
+
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
