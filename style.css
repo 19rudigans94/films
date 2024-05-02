@@ -296,6 +296,7 @@ main {
 .star {
     position: absolute;
     animation: gelatine 1s;
+    
 }
 
 @keyframes gelatine {
