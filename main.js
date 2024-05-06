@@ -9,14 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const favoritesContainer = document.querySelector('.favorite-movies');
 
 
-    // // переменная для API псевдоКинопоиска
+    // // переменная для API псевдоКинопоиска перенес в функцию getRandomMovieFromAPI
     // const options = {
     //     method: 'GET',
     //     headers: { accept: 'application/json', 'X-API-KEY': 'BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8' }
     // };
 
-    // получаем список избранных из локального хранилища
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
 
     // API для получения новостей и функции для создания карточки новости (ru, en, ua доступны разные языки но не везде есть катинки) 
     const news = async () => {
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const getRandomMovieFromAPI = async () => {
         const options = {
             method: 'GET',
-            headers: { accept: 'application/json', 'X-API-KEY': 'BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8' }
+            headers: { accept: 'application/json', 'X-API-KEY': 'CT4KCKH-JPN4227-MCNH7K2-ETEJVT6' }  // BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8
         };
 
         const response = await fetch('https://api.kinopoisk.dev/v1.4/movie/random?notNullFields=top250&notNullFields=description&notNullFields=poster.url', options);
@@ -262,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // функция для отображения карточек избранных фильмов из массива favorites (для страницы "избранное") из локального хранилища
+    // функция для отображения карточек избранных фильмов для страницы "избранное" из локального хранилища при  перезагрузке страницы
     function renderFavoriteCards() {
         // Получаем текущий список избранных из локального хранилища
         let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
@@ -292,7 +290,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const card = document.createElement('div');
         card.classList.add('card-favorite-movies');
         card.insertAdjacentHTML('afterbegin', clone);
-        console.log(clone);
         container.appendChild(card);
         card.dataset.movieId = (Math.random() * 1000).toFixed(0);
         movieId = card.dataset.movieId;
@@ -371,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 btnFavorite.style.backgroundColor = 'white';
                 btnFavorite.classList.remove('star');
+                removeFromFavorites(movieId);
             }
         }
     });
