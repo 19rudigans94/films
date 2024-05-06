@@ -9,15 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const favoritesContainer = document.querySelector('.favorite-movies');
 
 
-    // переменная для API псевдоКинопоиска
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'X-API-KEY': 'BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8' }
-    };
+    // // переменная для API псевдоКинопоиска
+    // const options = {
+    //     method: 'GET',
+    //     headers: { accept: 'application/json', 'X-API-KEY': 'BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8' }
+    // };
 
     // получаем список избранных из локального хранилища
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
 
     // API для получения новостей и функции для создания карточки новости (ru, en, ua доступны разные языки но не везде есть катинки) 
     const news = async () => {
@@ -37,9 +36,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // функция для получения рандомного фильма с API псевдоКинопоиска
     const getRandomMovieFromAPI = async () => {
+        const options = {
+            method: 'GET',
+            headers: { accept: 'application/json', 'X-API-KEY': 'BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8' }
+        };
+
         const response = await fetch('https://api.kinopoisk.dev/v1.4/movie/random?notNullFields=top250&notNullFields=description&notNullFields=poster.url', options);
         const data = await response.json();
-        showModalfromMain(data);
+        showModalfromMain(data); // использовать если запросы закончились
+        // return data; // использовать с API псевдоКинопоиска
     }
 
     // функция для создания карточки новости
@@ -86,13 +91,52 @@ document.addEventListener('DOMContentLoaded', function () {
         return card;
     }
 
-    // функция для генерации случайных постеров на главной странице и работы слайдера в дальнейшем заменить на API кинопоиска и получать рандомные постеры
-    function generateRandomPosters(numPosters) { // numPosters - кол-во постеров в слайдере (можно указать любое число)
+    // // функция для генерации случайных постеров на главной странице и работы слайдера на API кинопоиска
+    // async function generateRandomPosters(numPosters) {
+    //     const swiperWrapper = document.querySelector('.swiper-wrapper');
+    //     let promises = [];
+
+    //     // Выполняем запросы на получение рандомных фильмов и сохраняем их промисы
+    //     for (let i = 0; i < numPosters; i++) {
+    //         promises.push(getRandomMovieFromAPI());
+    //     }
+
+    //     // Дожидаемся выполнения всех промисов
+    //     const responses = await Promise.all(promises);
+    //     console.log(responses);
+
+    //     // Обрабатываем каждый ответ и добавляем его в слайдер
+    //     responses.forEach(data => {
+    //         const moviePosterUrl = data.poster.url;
+    //         swiperWrapper.innerHTML += `<div class="swiper-slide" style="background-image: url(${moviePosterUrl})"></div>`;
+    //     });
+
+    //     // Инициализируем слайдер после добавления всех постеров
+    //     new Swiper('.swiper-container', {
+    //         autoplay: {
+    //             delay: 2500,
+    //             disableOnInteraction: false,
+    //         },
+    //         pagination: {
+    //             el: ".swiper-pagination",
+    //             type: "progressbar",
+    //         },
+    //         direction: 'horizontal',
+    //         loop: true,
+    //         slidesPerView: 7,
+    //         spaceBetween: 20,
+    //     });
+    // }
+
+    // функция для генерации случайных постеров на главной странице и работы слайдера в дальнейшем заменить на API кинопоиска и получать рандомные постеры
+    function generateRandomPosters(numPosters) { // numPosters - кол-во постеров в слайдере (можно указать любое число)
         const swiperWrapper = document.querySelector('.swiper-wrapper');
         for (let i = 0; i < numPosters; i++) {
             const posterUrl = `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`;
             swiperWrapper.innerHTML += `<div class="swiper-slide" style="background-image: url(${posterUrl})"></div>`;
         }
+
+
         new Swiper('.swiper-container', {
             autoplay: {
                 delay: 2500,
@@ -108,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
             spaceBetween: 20,
         });
     }
+
 
     // генерирую массив для получения карточек фильмов
     function generateMoviesData(numMovies) { // numMovies - кол-во фильмов на странице (можно указать любое число)
@@ -219,8 +264,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // функция для отображения карточек избранных фильмов из массива favorites (для страницы "избранное") из локального хранилища
     function renderFavoriteCards() {
-        favorites.forEach(clone => {
-            favoritesContainer.insertAdjacentHTML('afterbegin', clone);
+        // Получаем текущий список избранных из локального хранилища
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+
+        // Проходим по всем элементам избранных и создаем DOM-элементы для каждого из них
+        Object.entries(favorites).forEach(([movieId, favoriteCardHTML]) => {
+            const card = document.createElement('div');
+            card.classList.add('card-favorite-movies');
+            card.innerHTML = favoriteCardHTML;
+
+            // Добавляем обработчик для кнопки удаления из избранного
+            const delCard = document.createElement('div');
+            delCard.classList.add('del-card');
+            delCard.textContent = 'X';
+            delCard.addEventListener('click', () => removeFromFavorites(movieId));
+
+            card.appendChild(delCard);
+
+            // Вставляем созданный DOM-элемент в контейнер для избранных элементов
+            favoritesContainer.appendChild(card);
         });
     }
 
@@ -230,7 +292,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const card = document.createElement('div');
         card.classList.add('card-favorite-movies');
         card.insertAdjacentHTML('afterbegin', clone);
+        console.log(clone);
         container.appendChild(card);
+        card.dataset.movieId = (Math.random() * 1000).toFixed(0);
+        movieId = card.dataset.movieId;
 
         // Удаляем первые два дочерних элемента из добавленной карточки
         const children = card.children;
@@ -245,16 +310,16 @@ document.addEventListener('DOMContentLoaded', function () {
         delCard.textContent = 'X';
         card.appendChild(delCard);
 
-        addToFavoritesLocalStorage(card.outerHTML);
+        addToFavoritesLocalStorage(movieId, card.outerHTML);
     }
 
     // функция для добавления фильмов в избранное на локальное хранилища
-    function addToFavoritesLocalStorage(favoriteCardHTML) {
+    function addToFavoritesLocalStorage(movieId, favoriteCardHTML) {
         // Получаем текущий список избранных из локального хранилища
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
 
-        // Добавляем новую карточку в список избранных
-        favorites.push(favoriteCardHTML);
+        // Добавляем новую карточку в список избранных по ключу movieId
+        favorites[movieId] = favoriteCardHTML;
 
         // Сохраняем обновленный список избранных в локальное хранилище
         localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -262,23 +327,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // функция для удаления фильмов из избранного с локального хранилища
     function removeFromFavorites(movieId) {
-        // Получаем текущий список избранных из локального хранилища
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-        // Ищем карточку с нужным movieId в массиве избранных
-        const index = favorites.findIndex(card => {
-            return card.dataset.movieId === movieId;
-        });
-
-        // Если найдена карточка с указанным movieId, удаляем её из массива
-        if (index !== -1) {
-            favorites.splice(index, 1);
-
-            // Обновляем локальное хранилище с обновленным списком избранных
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-        }
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+        delete favorites[movieId];
+        localStorage.setItem('favorites', JSON.stringify(favorites));
     }
-
 
     // добавляю жанры для поиска пока из массива genres 
     genres.forEach(genre => {
@@ -328,12 +380,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const target = event.target;
         if (target.classList.contains('del-card')) {
             const modalMovieInfoContainer = target.parentNode.querySelector('.modal-movie-info-container');
-            console.log(modalMovieInfoContainer);
             if (modalMovieInfoContainer) {
                 const movieId = modalMovieInfoContainer.dataset.movieId;
                 removeFromFavorites(movieId);
             }
-
             target.parentNode.remove();
         }
     });
