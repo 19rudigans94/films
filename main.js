@@ -391,15 +391,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // проогресс бар
 window.onload = function () {
-    const progressBar = document.getElementById('myBar');
-    const progressContainer = document.querySelector('.progress-container');
+    const footer = document.getElementById('myFooter');
+    const progressBar = document.querySelector('.progress-bar');
 
-    const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
 
     window.onscroll = function () {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const scrollProgress = (scrollTop / documentHeight) * 100;
+        const scrollProgress = (scrollTop / (documentHeight - windowHeight)) * 100;
 
-        progressBar.style.width = scrollProgress + "%";
+        progressBar.style.width = scrollProgress + '%';
     };
 };

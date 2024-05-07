@@ -30,8 +30,9 @@ nav ul li a {
     text-decoration: none;
 }
 
-footer {
+#myFooter {
     background-color: #333;
+    /* Цвет футера */
     color: #fff;
     margin-top: 20px;
     position: fixed;
@@ -43,12 +44,15 @@ footer {
 .progress-container {
     width: 100%;
     background-color: #f1f1f1;
+    height: 4px;
+    /* Высота контейнера прогресс-бара */
 }
 
 .progress-bar {
     width: 0;
-    height: 4px;
+    height: 100%;
     background-color: #4caf50;
+    /* Цвет прогресс-бара */
 }
 
 main {
