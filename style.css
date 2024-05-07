@@ -40,6 +40,17 @@ footer {
     text-align: center;
 }
 
+.progress-container {
+    width: 100%;
+    background-color: #f1f1f1;
+}
+
+.progress-bar {
+    width: 0;
+    height: 4px;
+    background-color: #4caf50;
+}
+
 main {
     padding: 20px;
     margin-bottom: 100px;

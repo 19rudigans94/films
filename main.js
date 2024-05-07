@@ -9,13 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const favoritesContainer = document.querySelector('.favorite-movies');
 
 
-    // // переменная для API псевдоКинопоиска перенес в функцию getRandomMovieFromAPI
-    // const options = {
-    //     method: 'GET',
-    //     headers: { accept: 'application/json', 'X-API-KEY': 'BVSW5PY-3ZD4PNB-KFXKP2X-WS9HSA8' }
-    // };
-
-
     // API для получения новостей и функции для создания карточки новости (ru, en, ua доступны разные языки но не везде есть катинки) 
     const news = async () => {
         const url = 'https://newsapi.org/v2/top-headlines?' +
@@ -150,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function () {
             spaceBetween: 20,
         });
     }
-
 
     // генерирую массив для получения карточек фильмов
     function generateMoviesData(numMovies) { // numMovies - кол-во фильмов на странице (можно указать любое число)
@@ -396,3 +388,18 @@ document.addEventListener('DOMContentLoaded', function () {
     renderFavoriteCards();
 });
 
+
+// проогресс бар
+window.onload = function () {
+    const progressBar = document.getElementById('myBar');
+    const progressContainer = document.querySelector('.progress-container');
+
+    const documentHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    window.onscroll = function () {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollProgress = (scrollTop / documentHeight) * 100;
+
+        progressBar.style.width = scrollProgress + "%";
+    };
+};
