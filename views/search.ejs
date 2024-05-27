@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./components/head_components.ejs') %>
+        <link rel="stylesheet" href="./assets/style/search.css">
+</head>
+
+<body>
+
+    <header>
+        <%- include('./components/header.ejs') %>
+    </header>
+    <!-- Раздел "Поиск" -->
+    <section class="search-section" id="search">
+        <div class="search-container">
+            <h2>Поиск фильмов</h2>
+            <form class="search-form">
+                <div class="form-group">
+                    <label for="search-title">Поиск по названию:</label>
+                    <input type="text" id="search-title" name="search-title" placeholder="Введите название фильма">
+                </div>
+                <div class="form-group">
+                    <label for="search-genre">Поиск по жанру:</label>
+                    <select id="search-genre" name="search-genre">
+                        <option value="">Выберите жанр</option>
+                        <!-- Опции для выбора жанра будут добавлены динамически из JavaScript, пока оставляем пустым -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="search-year">Поиск по году выпуска:</label>
+                    <input type="number" id="search-year" name="search-year" placeholder="Год выпуска">
+                </div>
+                <div class="form-group">
+                    <label for="search-actors">Поиск по актерам:</label>
+                    <input type="text" id="search-actors" name="search-actors" placeholder="Введите имя актера">
+                </div>
+                <div class="form-group">
+                    <label for="search-rating-min">Мин. рейтинг:</label>
+                    <input type="number" id="search-rating-min" name="search-rating-min" placeholder="Мин. рейтинг">
+                </div>
+                <div class="form-group">
+                    <label for="search-rating-max">Макс. рейтинг:</label>
+                    <input type="number" id="search-rating-max" name="search-rating-max" placeholder="Макс. рейтинг">
+                </div>
+                <div class="form-group">
+                    <label for="search-duration-min">Мин. продолжительность (мин):</label>
+                    <input type="number" id="search-duration-min" name="search-duration-min"
+                        placeholder="Мин. продолжительность">
+                </div>
+                <div class="form-group">
+                    <label for="search-duration-max">Макс. продолжительность (мин):</label>
+                    <input type="number" id="search-duration-max" name="search-duration-max"
+                        placeholder="Макс. продолжительность">
+                </div>
+                <div class="form-group">
+                    <label for="search-release-date-start">Дата выхода с:</label>
+                    <input type="date" id="search-release-date-start" name="search-release-date-start">
+                </div>
+                <div class="form-group">
+                    <label for="search-release-date-end">Дата выхода по:</label>
+                    <input type="date" id="search-release-date-end" name="search-release-date-end">
+                </div>
+                <div class="form-group">
+                    <label for="sort-by">Сортировать по:</label>
+                    <select id="sort-by" name="sort-by">
+                        <option value="alphabetical">По алфавиту</option>
+                        <option value="rating">По рейтингу</option>
+                        <option value="release-date">По дате выхода</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="search-country">Поиск по стране производства:</label>
+                    <input type="text" id="search-country" name="search-country"
+                        placeholder="Введите страну производства">
+                </div>
+                <div class="form-group">
+                    <label for="search-language">Поиск по языку озвучки/субтитров:</label>
+                    <input type="text" id="search-language" name="search-language"
+                        placeholder="Введите язык озвучки/субтитров">
+                </div>
+                <div class="form-group">
+                    <label for="search-director">Поиск по режиссеру:</label>
+                    <input type="text" id="search-director" name="search-director" placeholder="Введите имя режиссера">
+                </div>
+                <div class="form-group">
+                    <label for="search-tags">Поиск по тегам/ключевым словам:</label>
+                    <input type="text" id="search-tags" name="search-tags" placeholder="Введите теги/ключевые слова">
+                </div>
+                <div class="form-group">
+                    <label for="search-mpaa-rating">Поиск по рейтингу MPAA:</label>
+                    <select id="search-mpaa-rating" name="search-mpaa-rating">
+                        <option value="">Выберите рейтинг</option>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                        <option value="NC-17">NC-17</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="search-video-format">Поиск по формату видео:</label>
+                    <input type="text" id="search-video-format" name="search-video-format"
+                        placeholder="Введите формат видео">
+                </div>
+                <div class="form-group">
+                    <label for="search-age-rating">Поиск по возрастному рейтингу:</label>
+                    <input type="text" id="search-age-rating" name="search-age-rating"
+                        placeholder="Введите возрастной рейтинг">
+                </div>
+                <div class="form-group">
+                    <label for="search-based-on-events">Фильмы, основанные на реальных событиях:</label>
+                    <input type="checkbox" id="search-based-on-events" name="search-based-on-events">
+                </div>
+                <div class="form-group">
+                    <label for="search-literary-adaptations">Фильмы, снятые по мотивам литературных
+                        произведений:</label>
+                    <input type="checkbox" id="search-literary-adaptations" name="search-literary-adaptations">
+                </div>
+                <div class="form-group">
+                    <label>Фильтровать результаты по:</label>
+                    <div>
+                        <input type="checkbox" id="filter-new-releases" name="filter-new-releases">
+                        <label for="filter-new-releases">Новым релизам</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="filter-action" name="filter-action">
+                        <label for="filter-action">Жанру "Боевик"</label>
+                    </div>
+                </div>
+                <button type="submit" onclick="e.preventDefault()">Найти</button>
+            </form>
+        </div>
+        <div class="search-results">
+            <!-- Здесь будут отображаться результаты поиска -->
+        </div>
+    </section>
+
+    <footer>
+        <%- include('./components/footer.ejs') %>
+    </footer>
+
+</body>
+
+</html>

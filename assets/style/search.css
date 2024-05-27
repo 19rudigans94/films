@@ -1,0 +1,77 @@
+/* Общие стили для раздела "Поиск" */
+.search-section {
+    padding: 20px;
+}
+
+/* Стили для контейнера поиска */
+.search-container {
+    background-color: #f0f8f0;
+    /* Зеленый оттенок для контейнера */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Тень для контейнера */
+}
+
+/* Стили для заголовка раздела "Поиск" */
+.search-container h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #008000;
+    /* Зеленый цвет для заголовка */
+}
+
+/* Стили для формы поиска */
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Грид для формы с автоматическим изменением колонок */
+    grid-gap: 20px;
+}
+
+/* Стили для каждой группы элементов формы */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Стили для полей ввода */
+.search-form input[type="text"],
+.search-form input[type="number"],
+.search-form select,
+.search-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Стили для кнопки "Найти" */
+.search-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #008000;
+    /* Зеленый цвет для кнопки */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #006400;
+    /* Темно-зеленый цвет при наведении */
+}
+
+/* Стили для результатов поиска */
+.search-results {
+    margin-top: 20px;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .search-form {
+        grid-template-columns: 1fr;
+        /* Одна колонка на маленьких экранах */
+    }
+}

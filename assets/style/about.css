@@ -1,0 +1,19 @@
+ .container {
+     width: 80%;
+     margin: 0 auto;
+     padding: 20px 0;
+ }
+
+ .content {
+     margin-top: 20px;
+     text-align: center;
+ }
+
+ .content h2 {
+     color: #333;
+ }
+
+ .content p {
+     color: #666;
+     line-height: 1.6;
+ }

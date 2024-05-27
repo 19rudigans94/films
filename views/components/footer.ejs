@@ -1,0 +1,47 @@
+<footer id="myFooter">
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    <p id="footer-text">© Rudi 2024 Онлайн-кинотеатр. Все права защищены.</p>
+    <script>
+        function progressBar() {
+            const progressBarEl = document.querySelector('.progress-bar');
+            const footerTextEl = document.getElementById('footer-text');
+            const documentHeight = document.documentElement.scrollHeight;
+            const windowHeight = window.innerHeight;
+
+            window.onscroll = function () {
+                const scrollProgress = (window.scrollY / (documentHeight - windowHeight)) * 100;
+                progressBarEl.style.width = `${scrollProgress}%`;
+
+                if (scrollProgress < 25) {
+                    progressBarEl.style.backgroundColor = 'green';
+                } else if (scrollProgress >= 25 && scrollProgress < 50) {
+                    progressBarEl.style.backgroundColor = 'yellow';
+                } else if (scrollProgress >= 50 && scrollProgress < 75) {
+                    progressBarEl.style.backgroundColor = 'orange';
+                } else {
+                    progressBarEl.style.backgroundColor = 'red';
+                }
+            };
+
+            const footer = document.getElementById('myFooter');
+            footer.addEventListener('mouseenter', function () {
+                footerTextEl.textContent = '↑ Вверх';
+            });
+
+            footer.addEventListener('mouseleave', function () {
+                footerTextEl.textContent = '© Rudi 2024 Онлайн-кинотеатр. Все права защищены.';
+            });
+
+            footer.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        };
+
+        progressBar();
+    </script>
+</footer>

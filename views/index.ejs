@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./components/head_components.ejs') %>
+</head>
+
+<body>
+
+    <header>
+        <%- include('./components/header.ejs') %>
+    </header>
+
+
+    <main>
+        <section class="main-section" id="main_header">
+            <h2>Главная</h2>
+            <div class="carousel-container">
+                <div class="swiper-container carousel">
+                    <div class="swiper-wrapper">
+                        <!-- Здесь будут отображаться рандомные постеры кино в карусели -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="news-section">
+                <!-- Здесь будут отображаться рандомные новости через API -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <%- include('./components/footer.ejs') %>
+    </footer>
+
+
+
+    <div class="modal_container hide">
+        <!-- модальное окно для отображения информации о фильме -->
+    </div>
+
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+</body>
+
+</html>
