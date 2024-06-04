@@ -4,6 +4,8 @@
     </div>
     <p id="footer-text">© Rudi 2024 Онлайн-кинотеатр. Все права защищены.</p>
     <script>
+
+
         function progressBar() {
             const progressBarEl = document.querySelector('.progress-bar');
             const footerTextEl = document.getElementById('footer-text');
@@ -42,6 +44,8 @@
             });
         };
 
-        progressBar();
+        addEventListener('DOMContentLoaded', function () {
+            progressBar();
+        })
     </script>
 </footer>

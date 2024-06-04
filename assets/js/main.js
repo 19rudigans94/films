@@ -37,49 +37,7 @@ const getRandomMovieFromAPI = async () => {
     // return data; // использовать с API псевдоКинопоиска
 }
 
-// функция для создания карточки новости
-function createNewsCard(news) {
-    const card = document.createElement('div');
-    card.classList.add('news-card');
 
-    const content = document.createElement('div');
-    content.classList.add('news-content');
-
-    const title = document.createElement('h3');
-    title.textContent = news.title;
-
-    const description = document.createElement('p');
-    description.textContent = news.description;
-
-    const publishedAt = document.createElement('p');
-    publishedAt.textContent = `Опубликован: ${new Date(news.publishedAt).toLocaleString()}`;
-
-    const fullArticleLink = document.createElement('a');
-    fullArticleLink.href = news.url;
-    fullArticleLink.textContent = 'читать полностью';
-    fullArticleLink.target = '_blank';
-    fullArticleLink.classList.add('read-more-link');
-
-    content.appendChild(title);
-    content.appendChild(description);
-    content.appendChild(publishedAt);
-    content.appendChild(fullArticleLink);
-
-    card.appendChild(content);
-
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('news-image');
-
-    const image = document.createElement('img');
-    image.src = news.urlToImage;
-    image.alt = news.title;
-
-    imageContainer.appendChild(image);
-
-    card.appendChild(imageContainer);
-
-    return card;
-}
 
 // // функция для генерации случайных постеров на главной странице и работы слайдера на API кинопоиска
 // async function generateRandomPosters(numPosters) {

@@ -3,6 +3,7 @@
 
 <head>
     <%- include('./components/head_components.ejs') %>
+        <link rel="stylesheet" type="text/css" href="../assets/style/movies_style.css">
 </head>
 
 <body>
@@ -11,19 +12,23 @@
         <%- include('./components/header.ejs') %>
     </header>
 
-    <!-- Раздел "Фильмы" -->
-    <section id="_movies">
-        <div id="movies">
-            <!-- Карточки фильмов -->
-            <div>
-                Здесь будут отображаться карточки фильмов
-            </div>
+    <div id="movies">
+        <!-- Карточки фильмов -->
+        <div>
+            <!-- <%- include('./components/tooth_chek_box.ejs') %> -->
+
         </div>
-    </section>
+            <div>
+                Выберите фильм для просмотра <br>
+                оставьте комментарии и оцените фильм.
+            </div>
+    </div>
 
     <footer>
         <%- include('./components/footer.ejs') %>
     </footer>
+
+    <script src="../assets/js/maker_movies.js"></script>
 </body>
 
 </html>

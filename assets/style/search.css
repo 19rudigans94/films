@@ -6,11 +6,9 @@
 /* Стили для контейнера поиска */
 .search-container {
     background-color: #f0f8f0;
-    /* Зеленый оттенок для контейнера */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* Тень для контейнера */
 }
 
 /* Стили для заголовка раздела "Поиск" */
@@ -18,18 +16,15 @@
     margin-top: 0;
     margin-bottom: 20px;
     color: #008000;
-    /* Зеленый цвет для заголовка */
 }
 
 /* Стили для формы поиска */
 .search-form {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    /* Грид для формы с автоматическим изменением колонок */
     grid-gap: 20px;
 }
 
-/* Стили для каждой группы элементов формы */
 .form-group {
     margin-bottom: 15px;
 }
@@ -50,7 +45,6 @@
     width: 100%;
     padding: 10px;
     background-color: #008000;
-    /* Зеленый цвет для кнопки */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -60,7 +54,6 @@
 
 .search-form button:hover {
     background-color: #006400;
-    /* Темно-зеленый цвет при наведении */
 }
 
 /* Стили для результатов поиска */
@@ -72,6 +65,5 @@
 @media (max-width: 768px) {
     .search-form {
         grid-template-columns: 1fr;
-        /* Одна колонка на маленьких экранах */
     }
 }

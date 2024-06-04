@@ -1,0 +1,139 @@
+/* Основные стили карточки фильма */
+
+#movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.movie-card {
+    --transition-duration: 700ms;
+    background-color: #333;
+    /* Цвет фона карточки */
+    color: white;
+    position: relative;
+    border-radius: 0.6em;
+    overflow: hidden;
+    font-size: 120%;
+    width: 350px;
+    /* Установка ширины карточки */
+    height: auto;
+    /* Высота будет рассчитываться автоматически */
+    aspect-ratio: 16/9;
+    /* Сохранение соотношения сторон 16:9 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-duration);
+}
+
+/* Стили для изображения */
+img {
+    height: 100%;
+    width: 100%;
+    transition: transform var(--transition-duration);
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Стили для контента внутри карточки */
+.content {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    /* Позиционирование контента в нижней части карточки */
+    left: 0;
+    right: 0;
+    padding: 1em;
+    /* Внутренние отступы */
+    text-align: left;
+    transition: transform var(--transition-duration) var(--ease-in-out);
+    transform: translateY(100%);
+    /* Изначальное положение контента */
+    opacity: 0;
+    /* Изначальная прозрачность контента */
+}
+
+/* Стили для заголовка */
+h1 {
+    font-size: 1.8em;
+    color: inherit;
+    margin: 0 0 0.5em 0;
+}
+
+/* Стили для информации о фильме */
+.infos {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #eee;
+    display: flex;
+    gap: 0.35em;
+    align-items: flex-end;
+}
+
+/* Стили для описания фильма */
+.synopsis {
+    font-size: 0.8em;
+    line-height: 1.4;
+    margin-block: 0.75em;
+    transition: opacity var(--transition-duration), transform var(--transition-duration);
+}
+
+/* Эффекты при наведении */
+.movie-card:hover {
+    transform: scale(1.03);
+
+    img {
+        transform: scale(1.03);
+    }
+
+    .content {
+        transform: translateY(0);
+        /* Показать контент при наведении */
+        opacity: 1;
+        /* Сделать контент непрозрачным */
+    }
+}
+
+/* Стили, когда курсор не наведен на карточку */
+.movie-card:not(:hover) {
+    .content {
+        transform: translateY(100%);
+        /* Скрыть контент */
+        opacity: 0;
+        /* Сделать контент прозрачным */
+    }
+}
+
+/* Стили для контейнера иконок */
+.icons {
+    position: absolute;
+    top: 0.5em;
+    /* Отступ сверху */
+    right: 0.5em;
+    /* Отступ справа */
+    display: flex;
+    gap: 0.5em;
+}
+
+/* Стили для иконок */
+.icon {
+    fill: white;
+    /* Цвет иконок */
+    width: 24px;
+    /* Ширина иконки */
+    height: 24px;
+    /* Высота иконки */
+    cursor: pointer;
+}
+
+/* Стили для иконки "Избранное" */
+.favorite:hover {
+    fill: red;
+    /* Цвет при наведении */
+}
+
+/* Стили для иконки "Удалить" */
+.delete:hover {
+    fill: #f44336;
+    /* Цвет при наведении */
+}
